@@ -23,6 +23,10 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/courses/**").permitAll()
+                    .requestMatchers("/api/blog-posts/**").permitAll()
+                    .requestMatchers("/api/instructors/**").permitAll()
+                    .requestMatchers("/api/students/**").permitAll() // Đặt trước để có độ ưu tiên cao hơn
                 .requestMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
             )
