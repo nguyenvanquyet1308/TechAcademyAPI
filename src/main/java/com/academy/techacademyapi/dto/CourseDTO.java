@@ -2,6 +2,8 @@ package com.academy.techacademyapi.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +26,7 @@ public class CourseDTO {
     private Long instructorId;
     private String instructorName;
     private Integer studentsCount;
+    private List<CourseChapterDTO> chapters = new ArrayList<>();
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

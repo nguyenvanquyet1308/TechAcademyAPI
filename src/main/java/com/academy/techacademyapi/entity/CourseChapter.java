@@ -1,11 +1,8 @@
 package com.academy.techacademyapi.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,44 +11,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "course_chapters")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course {
+public class CourseChapter {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(nullable = false)
-    private String name;
+    private String title;
     
-    @Column(columnDefinition = "TEXT")
-    private String description;
-    
-    @Column(nullable = false)
-    private BigDecimal price;
-    
-    private String thumbnail;
-    
-    private Integer duration; // Total duration in minutes
-    
-    private String level;
+    private Integer position;
     
     @ManyToOne
-    @JoinColumn(name = "instructor_id")
-    private Instructor instructor;
+    @JoinColumn(name = "course_id")
+    private Course course;
     
-    @OneToMany(mappedBy = "course")
-    private Set<Student> students = new HashSet<>();
-    
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("position ASC")
-    private List<CourseChapter> chapters = new ArrayList<>();
-    
-    private Boolean isActive = true;
+    private List<CourseLesson> lessons = new ArrayList<>();
     
     @Column(name = "created_at")
     private LocalDateTime createdAt;

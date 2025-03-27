@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 import com.academy.techacademyapi.dto.CourseDTO;
 import com.academy.techacademyapi.entity.Course;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CourseChapterMapper.class})
 public interface CourseMapper {
     
     CourseMapper INSTANCE = Mappers.getMapper(CourseMapper.class);
@@ -24,12 +24,14 @@ public interface CourseMapper {
     
     @Mapping(target = "instructor", ignore = true)
     @Mapping(target = "students", ignore = true)
+    @Mapping(target = "chapters", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     Course toEntity(CourseDTO courseDTO);
     
     @Mapping(target = "instructor", ignore = true)
     @Mapping(target = "students", ignore = true)
+    @Mapping(target = "chapters", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     void updateEntityFromDTO(CourseDTO courseDTO, @MappingTarget Course course);
